@@ -1,2 +1,10 @@
 <% provide(:title, @user.name) %>
 <h1>Hello <%= @user.name %></h1>
+
+<div class="col-md-8">
+  <% if @user.microposts.any? %>
+    <ol class="microposts">
+      <%= render @microposts %>
+    </ol>
+  <% end %>
+</div>
