@@ -1,10 +1,84 @@
+<% responses = ["Basic Successful Match Response with LEVEL_1", "Basic Successful Match Response with LEVEL_2","Basic No Match Response",
+                "No Authentication Context Response", "Authentication Failed Response", "Requester Error Response",
+                "Account Creation Response with LEVEL_1", "Account Creation Response with LEVEL_2",
+                "Fraudulent match response with assertions signed by hub"] %>
+
+<% disabledElements = [] %>
+<% current_user.microposts.each do |micropost| %>
+  <% disabledElements << micropost.scenario %>
+<% end %>
+
+<br><br><p> Please answer the required feilds below and confrim your evidence by clicking the upload button.
+       Click here for <a href="#link"> instructions and examples! </a></p><br>
+
 <%= form_for(@micropost) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  <div class="field">
-    <%= f.text_area :content, placeholder: "Compose new micropost..." %>
+
+  <div class="form-group"><br>
+     <label class="form-label"> Select a scenario name </label>
+     <br><br><br><%= f.select :scenario, responses, :disabled => disabledElements %><br>
+   </div>
+
+  <div class="form-group">
+    <label class="form-label"> Leave additional notes here </label><br><br><br>
+    <%= f.text_area :content, placeholder: "Comment here...", class: "textarea" %>
+    <br><details role="group">
+      <summary role="button" aria-controls="details-content-0" aria-expanded="true">
+        <span class="summary"> What do I comment? </span></summary>
+      <div class="panel-border-narrow" aria-hidden="false">
+        <p> Please ensure all screenshots are annotated with the scenario that is running and please provide a paragraph
+            describing what is happening. If you didn’t run this test, why was it considered unnecessary? </p>
+      </div>
+    </details>
   </div>
-  <%= f.submit "Post", class: "btn btn-primary" %>
-  <span class="picture">
-    <%= f.file_field :picture %>
-  </span>
-<% end %>
+
+  <div class="form-group">
+    <label class="form-label"> Upload a screenshot of the scenario </label><br><br><br>
+    <%= f.file_field :picture, class: "bigFont" %>
+    <br><details role="group">
+      <summary role="button" aria-controls="details-content-0" aria-expanded="true">
+        <span class="summary"> What do I upload? </span></summary>
+      <div class="panel-border-narrow" aria-hidden="false">
+        <p> Only upload a single screenshot showing the scenario that is running. </p>
+      </div>
+    </details>
+  </div>
+
+  <%= f.submit "Post", class: "button" %>
+<% end %> <br><br>
+
+<% descriptions = ["Issues a successful match response with Level Of Assurance LEVEL_1. The user has been verified successfully.",
+                     "Issues a successful match response with Level Of Assurance LEVEL_2. The user has been verified successfully.",
+                     "Issues a No Match response. In this scenario a match was not found by the Local Matching Service.",
+                     "Issues a response with NoAuthnContext status. This happens when the user cancels or fails to authenticate at an appropriate level of assurance.",
+                     "Issues an Authentication Failed response. The user was not authenticated successfully.",
+                     "Issues a response with an ERROR status and no assertion. The service should display an error page to the user.",
+                     "Account Creation Response with Level of Assurance LEVEL_1. The response contains a hashed pid and attributes of the user that can be used to identify or create an account.",
+                     "Account Creation Response with Level of Assurance LEVEL_2. The response contains a hashed pid and attributes of the user that can be used to identify or create an account.",
+                     "Issues a response with an assertion signed with the hub's private key. Your service should return an error to the user because your service should only trust assertions signed by your matching service adapter."] %>
+
+<div id="link">
+  <h3> For examples and instructions for each reponse, expand the following links below; </h3>
+
+  <% counter = 0 %>
+  <% responses.each do |response| %>
+    <div>
+      <details role="group">
+        <summary role="button" aria-controls="details-content-0" aria-expanded="true">
+          <span class="summary"> Example of <%= response %></span></summary>
+        <div class="panel-border-narrow" aria-hidden="false">
+          <div class="grid-row">
+            <div class="column-one-half">
+              <p><%= descriptions[counter] %></p>
+              <div class="bottomPadding">
+                <img src="<%= asset_path( "#{response}" ) %>"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    </div><br>
+    <% counter += 1 %>
+  <% end %>
+
+</div>

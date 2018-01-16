@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title><%= full_title(yield(:title)) %></title>
+    <title>Compliance Tool Evidence</title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all',
                                               'data-turbolinks-track': 'reload' %>
@@ -8,14 +8,19 @@
     <%= render 'layouts/shim' %>
   </head>
   <body>
-    <%= render 'layouts/header' %>
-    <div class="container">
-      <% flash.each do |message_type, message| %>
-      <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
-     <% end %>
-      <%= yield %>
-      <%= render 'layouts/footer' %>
-      <%= debug(params) if Rails.env.development? %>
-    </div>
+    <div id="page-container">
+      <div class="phase-banner">
+        <p><strong class="phase-tag"> ALPHA </strong>
+          <span> Enable services to know what and how they should provide evidence of testing in the compliance tool </span></p>
+      </div>
+      <%= render 'layouts/header' %>
+
+        <% flash.each do |message_type, message| %>
+        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+       <% end %>
+        <%= yield %>
+        <%= render 'layouts/footer' %>
+        <!-- <%= debug(params) if Rails.env.development? %> --> <!-- DEBUGGER -->
+      </div>
   </body>
 </html>

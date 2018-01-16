@@ -1,11 +1,12 @@
-<li id="micropost-<%= micropost.id %>">
-  <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
-  <span class="content">
-    <%= micropost.content %>
-    <%= image_tag micropost.picture.url if micropost.picture? %>
-  </span>
-  <% if current_user?(micropost.user) %>
-    <%= link_to "delete", micropost, method: :delete,
-                                     data: { confirm: "You sure?" } %>
-  <% end %>
-</li>
+<table>
+  <tbody>
+    <tr>
+      <td class="scenarioWidth"><h2><%= micropost.scenario %></h2></td>
+      <td><h2><%= micropost.content %></h2></td>
+      <td class="tableLinkWidth"><h2><%= link_to "View", micropost.picture.url %></h2></td>
+      <td class="tableLinkWidth"><% if current_user?(micropost.user) %>
+        <h2><%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" } %></h2>
+      <% end %></td>
+    </tr>
+  </tbody>
+</table>

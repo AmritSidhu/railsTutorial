@@ -1,93 +1,255 @@
+@import '_typography';
+@import '_grid_layout';
+@import 'design-patterns/_alpha-beta';
+@import 'design-patterns/_buttons';
+@import '_css3';
+@import 'design-patterns/_breadcrumbs';
+@import 'conditionals';
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-/* mixins, variables, etc. */
-
-$gray-medium-light: #eaeaea;
-
-@mixin box_sizing {
-  -moz-box-sizing:    border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing:         border-box;
-}
-
-/* universal */
-
-body {
-  padding-top: 60px;
-}
-
-section {
-  overflow: auto;
-}
-
-textarea {
-  resize: vertical;
-}
-
-.center {
-  text-align: center;
-  h1 {
-    margin-bottom: 10px;
-  }
-}
-
-/* typography */
-
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1;
-}
 
 h1 {
-  font-size: 3em;
-  letter-spacing: -2px;
-  margin-bottom: 30px;
-  text-align: center;
+  @include heading-48;
+  font-weight: bold;
 }
 
 h2 {
-  font-size: 1.2em;
-  letter-spacing: -1px;
-  margin-bottom: 30px;
-  text-align: center;
-  font-weight: normal;
-  color: $gray-light;
+  @include core-19($tabular-numbers: true);
+}
+
+h3 {
+  @include core-19;
+  font-weight: bold;
 }
 
 p {
-  font-size: 1.1em;
-  line-height: 1.7em;
+  @include core-19;
+}
+
+.bigFont {
+  @include core-19;
+}
+
+#page-container {
+  @extend %site-width-container;
+}
+
+.phase-banner {
+  @include phase-banner();
+}
+
+.button {
+  @include button;
+}
+
+.button-secondary {
+  @include button($grey-3);
+}
+
+.button-warning {
+  @include button($red);
+}
+
+table {
+  table-layout:fixed;
+  width:100%;
+}
+
+thead {
+  text-align: left;
+}
+
+td, th {
+  text-transform: none;
+  border-bottom: 1px solid #bfc1c3;
+}
+
+.tableLinkWidth {
+  width: 10%;
+  text-align: center;
+}
+
+.tableAdminWidth {
+  width: 12%;
+  text-align: center;
+}
+
+.scenarioWidth {
+  padding-right: 1.5em;
+  width: 25%;
 }
 
 
-/* header */
+img {
+  max-width: 98%;
+}
 
-#logo {
-  float: left;
-  margin-right: 10px;
-  font-size: 1.7em;
-  color: white;
-  text-transform: uppercase;
-  letter-spacing: -1px;
-  padding-top: 9px;
-  font-weight: bold;
-  &:hover {
-    color: white;
-    text-decoration: none;
+.grid-row {
+  @extend %grid-row;
+  margin-left: 0;
+  .column-third {
+    @include grid-column( 1/3 );
+  }
+  .column-two-thirds {
+    @include grid-column( 2/3 );
   }
 }
 
-/* footer */
+.column-one-half {
+  float: left;
+  width: 50%;
+  position: relative;
+}
+
+.bottomLeft {
+   position: absolute;
+   bottom: 30px;
+   left: 10px;
+}
+
+.breadcrumbs {
+  @include breadcrumbs;
+}
+
+.table-column-with-padding {
+  margin-right: 15px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+details summary {
+  display: inline-block;
+  color: #005ea5;
+  cursor: pointer;
+  position: relative;
+  margin-bottom: 0.26316em;
+  @include core-19;
+}
+
+.panel-border-narrow {
+  border-left-width: 5px;
+  box-sizing: border-box;
+  clear: both;
+  border-left-style: solid;
+  border-color: #bfc1c3;
+  padding-left: 0.78947em;
+  padding-top: 0.08947em;;
+  padding-bottom: 0.08947em;;
+}
+
+.form-control {
+  border: 2px solid $black;
+  border-radius: 0;
+  font-size: 19px;
+  line-height: 1.31579;
+}
+
+.form-label {
+  @include heading-24;
+  display: block;
+  float: left;
+  clear: left;
+  font-family: "nta", Arial, sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  line-height: 1.25;
+}
+
+.textarea {
+  width: 50%;
+  @include core-19;
+  border: 2px solid #0b0c0c;
+  padding: 5px 4px 4px;
+  display: block;
+  height: 8em;
+}
+
+select, input[type="color" i][list] {
+  background-color: #f8f8f8;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #a6a6a6;
+  border-image: initial;
+  @include core-19;
+  width: 50%;
+  margin-top: -5px;
+}
+
+.form-group {
+  margin-bottom: 40px;
+  box-sizing: border-box;
+}
+
+.bottomPadding {
+  padding-bottom: 1.3em;
+}
+/*
+.radio-label {
+  height: 60px;
+}
+.radio-tag {
+  margin-left: 15px;
+  position: relative;
+  top: 3px;
+}
+.check-box {
+  width: 39px;
+  height: 39px;
+  border: 2px solid $black;
+  box-sizing: border-box;
+  border-radius: 100%;
+  cursor: pointer;
+  position: relative;
+  bottom: 4px;
+  float: left;
+}
+.check-box:focus {
+  box-shadow: 0 0 0 3pt $yellow;
+}
+.control-indicator {
+  position: relative;
+  bottom: 30px;
+  width: 39px;
+  height: 39px;
+  background: $white;
+  border-radius: 100%;
+  border: 2px solid $black;
+  cursor: pointer;
+}
+.control-indicator:after {
+  content: "";
+  position: relative;
+  color: $black;
+  border: 2px solid $black;
+  left: 6px;
+  top: 6px;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  background: $black;
+  display: none;
+}
+.form-label input:checked ~ .control-indicator:after {
+  display: block;
+}
+*/
+
+.navright {
+  float: right;
+  margin-top: -77px;
+}
 
 footer {
   margin-top: 45px;
   padding-top: 5px;
-  border-top: 1px solid $gray-medium-light;
-  color: $gray-light;
+  border-top: 1px solid black;
+  color: black;
   a {
-    color: $gray;
+    color: black;
     &:hover {
-      color: $gray-darker;
+      color: grey;
     }
   }
   small {
@@ -100,102 +262,5 @@ footer {
       float: left;
       margin-left: 15px;
     }
-  }
-}
-
-/* miscellaneous */
-
-.debug_dump {
-  clear: both;
-  float: left;
-  width: 100%;
-  margin-top: 45px;
-  @include box_sizing;
-}
-
-/* forms */
-
-input, textarea, select, .uneditable-input {
-  border: 1px solid #bbb;
-  width: 100%;
-  margin-bottom: 15px;
-  @include box_sizing;
-}
-
-input {
-  height: auto !important;
-}
-
-#error_explanation {
-  color: red;
-  ul {
-    color: red;
-    margin: 0 0 30px 0;
-  }
-}
-
-.field_with_errors {
-  @extend .has-error;
-  .form-control {
-    color: $state-danger-text;
-  }
-}
-
-/* Users index */
-
-.users {
-  list-style: none;
-  margin: 0;
-  li {
-    overflow: auto;
-    padding: 10px 0;
-    border-bottom: 1px solid $gray-lighter;
-  }
-}
-
-/* microposts */
-
-.microposts {
-  list-style: none;
-  padding: 0;
-  li {
-    padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
-  }
-  .user {
-    margin-top: 5em;
-    padding-top: 0;
-  }
-  .content {
-    display: block;
-    margin-left: 60px;
-    img {
-      display: block;
-      padding: 5px 0;
-    }
-  }
-  .timestamp {
-    color: $gray-light;
-    display: block;
-    margin-left: 60px;
-  }
-  .gravatar {
-    float: left;
-    margin-right: 10px;
-    margin-top: 5px;
-  }
-}
-
-aside {
-  textarea {
-    height: 100px;
-    margin-bottom: 5px;
-  }
-}
-
-span.picture {
-  margin-top: 10px;
-  input {
-    border: 0;
   }
 }

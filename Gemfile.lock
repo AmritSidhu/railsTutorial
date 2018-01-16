@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/alphagov/govuk_frontend_toolkit_gem.git
+  revision: 33c067dcd0adcb6caff840d5729463f6c8681505
+  submodules: true
+  specs:
+    govuk_frontend_toolkit (7.2.0)
+      railties (>= 3.1.0)
+      sass (>= 3.2.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -239,6 +248,7 @@ DEPENDENCIES
   coffee-rails (= 4.2.2)
   faker (= 1.7.3)
   fog-aws (= 2.0.0)
+  govuk_frontend_toolkit!
   guard (= 2.14.1)
   guard-minitest (= 2.4.6)
   jbuilder (= 2.7.0)
