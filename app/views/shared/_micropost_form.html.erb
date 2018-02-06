@@ -16,7 +16,14 @@
 
   <div class="form-group"><br>
      <label class="form-label"> Select a scenario name </label>
-     <br><br><br><%= f.select :scenario, responses, :disabled => disabledElements %><br>
+     <br><br><br><%= f.select :scenario, responses, :disabled => disabledElements %><br><br>
+     <details role="group">
+       <summary role="button" aria-controls="details-content-0" aria-expanded="true">
+         <span class="summary"> What do I upload? </span></summary>
+       <div class="panel-border-narrow" aria-hidden="false">
+         <p> Only upload a single screenshot showing the scenario that is running. </p>
+       </div>
+     </details>
    </div>
 
   <div class="form-group">
